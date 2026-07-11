@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diego Cuaran – Systems Administrator | Infrastructure Engineer | IT Operations</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy:    #0D2137;
+  --blue:    #1A4C8B;
+  --blue-mid: #2563A8;
+  --blue-light: #E8F0FB;
+  --steel:   #3C5A7A;
+  --ink:     #1A2433;
+  --ink-soft:#374151;
+  --gray:    #64748B;
+  --gray-lt: #F1F4F8;
+  --border:  #D1D9E4;
+  --white:   #FFFFFF;
+  --teal:    #0F766E;
+  --teal-lt: #E0F2F1;
+  --amber:   #B45309;
+  --amber-lt:#FEF3C7;
+  --rule:    1.5px solid var(--border);
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #CBD5E1;
+  color: var(--ink);
+  font-size: 8.5pt;
+  line-height: 1.55;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ═══════════════════════════════════════════
+   PRINT BUTTON
+═══════════════════════════════════════════ */
+.print-btn {
+  position: fixed;
+  top: 16px; right: 16px;
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 9px 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 7.5pt;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-transform: uppercase;
+  z-index: 9999;
+  box-shadow: 0 3px 14px rgba(26,76,139,0.35);
+  transition: background 0.15s;
+}
+.print-btn:hover { background: var(--navy); }
+
+/* ═══════════════════════════════════════════
+   PAGE WRAPPER
+═══════════════════════════════════════════ */
+.page-wrapper {
+  padding: 22px 0 30px;
+}
+
+.page {
+  width: 210mm;
+  background: var(--white);
+  margin: 0 auto 4px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.16);
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   HEADER BAND
+═══════════════════════════════════════════ */
+.header {
+  background: var(--navy);
+  padding: 28px 36px 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* decorative geometry */
+.header::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -20px; right: 80px;
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.025);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.header-left {}
+
+.name-label {
+  font-size: 6pt;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 5px;
+}
+
+.name {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 28pt;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.05;
+  letter-spacing: -0.5px;
+}
+
+.tagline {
+  margin-top: 10px;
+  font-size: 8.5pt;
+  font-weight: 400;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.5;
+  max-width: 460px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 8px;
+}
+
+.tagline strong {
+  color: rgba(255,255,255,0.88);
+  font-weight: 600;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.contact-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 7.3pt;
+  color: rgba(255,255,255,0.72);
+  white-space: nowrap;
+}
+
+.contact-chip .dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--blue-mid);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════
+   ROLES STRIP
+═══════════════════════════════════════════ */
+.roles-strip {
+  background: var(--blue);
+  padding: 8px 36px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.role-badge {
+  font-size: 6.8pt;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 2.5px 9px;
+  border-radius: 2px;
+}
+
+/* ═══════════════════════════════════════════
+   BODY LAYOUT (two-column below header)
+═══════════════════════════════════════════ */
+.body-layout {
+  display: grid;
+  grid-template-columns: 62mm 1fr;
+}
+
+/* ═══════════════════════════════════════════
+   SIDEBAR
+═══════════════════════════════════════════ */
+.sidebar {
+  background: var(--gray-lt);
+  border-right: 1px solid var(--border);
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sb-section {}
+
+.sb-label {
+  font-size: 5.8pt;
+  font-weight: 700;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 7px;
+  padding-bottom: 4px;
+  border-bottom: 1.5px solid var(--blue-light);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sb-label::before {
+  content: '';
+  display: inline-block;
+  width: 8px; height: 2px;
+  background: var(--blue);
+}
+
+/* skill groups */
+.skill-group { margin-bottom: 8px; }
+
+.skill-group-name {
+  font-size: 6.3pt;
+  font-weight: 600;
+  color: var(--steel);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.stag {
+  display: inline-block;
+  font-size: 6.2pt;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 2px;
+  line-height: 1.5;
+}
+
+.stag.sys {
+  background: rgba(26,76,139,0.09);
+  border: 1px solid rgba(26,76,139,0.2);
+  color: var(--blue);
+}
+
+.stag.net {
+  background: rgba(15,118,110,0.07);
+  border: 1px solid rgba(15,118,110,0.18);
+  color: var(--teal);
+}
+
+.stag.sec {
+  background: rgba(180,83,9,0.07);
+  border: 1px solid rgba(180,83,9,0.18);
+  color: var(--amber);
+}
+
+.stag.auto {
+  background: rgba(60,90,122,0.08);
+  border: 1px solid rgba(60,90,122,0.18);
+  color: var(--steel);
+}
+
+/* competencies */
+.comp-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.comp {
+  font-size: 6.2pt;
+  font-weight: 500;
+  padding: 2.5px 7px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--ink-soft);
+}
+
+/* cert items */
+.cert-item {
+  margin-bottom: 7px;
+  padding-left: 8px;
+  border-left: 2px solid var(--blue);
+}
+.cert-name { font-size: 7pt; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.cert-issuer { font-size: 6.2pt; color: var(--gray); }
+
+/* lang bars */
+.lang-item { margin-bottom: 7px; }
+.lang-row { display: flex; justify-content: space-between; margin-bottom: 3px; }
+.lang-name { font-size: 7pt; font-weight: 500; color: var(--ink); }
+.lang-level { font-size: 6pt; color: var(--gray); }
+.lang-bar { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.lang-fill { height: 100%; background: var(--blue); border-radius: 2px; }
+
+/* edu in sidebar */
+.edu-item { margin-bottom: 8px; }
+.edu-deg { font-size: 7pt; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.edu-inst { font-size: 6.3pt; color: var(--gray); margin-top: 1px; }
+.edu-year { font-size: 6pt; color: var(--blue); font-weight: 500; margin-top: 1px; }
+
+/* ═══════════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════════ */
+.main {
+  padding: 22px 28px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+/* section */
+.section {}
+
+.sec-title {
+  font-size: 6.5pt;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.sec-title::before {
+  content: '';
+  display: inline-block;
+  width: 12px; height: 2px;
+  background: var(--blue);
+  flex-shrink: 0;
+}
+
+/* summary */
+.summary-text {
+  font-size: 8pt;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  padding: 10px 13px;
+  background: var(--blue-light);
+  border-left: 3px solid var(--blue);
+  border-radius: 0 3px 3px 0;
+}
+
+/* highlight boxes under summary */
+.highlight-row {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.hl-box {
+  padding: 8px 10px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 2.5px solid var(--blue);
+  border-radius: 0 0 3px 3px;
+  text-align: center;
+}
+
+.hl-val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 15pt;
+  color: var(--blue);
+  line-height: 1;
+}
+
+.hl-label {
+  font-size: 5.8pt;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-top: 2px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+/* jobs */
+.job {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed var(--border);
+  page-break-inside: avoid;
+}
+
+.job:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 1px;
+}
+
+.job-title {
+  font-size: 8.8pt;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.job-date {
+  font-size: 6.5pt;
+  color: var(--blue);
+  font-weight: 600;
+  background: var(--blue-light);
+  padding: 2px 7px;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.job-org {
+  font-size: 7.2pt;
+  color: var(--gray);
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+.job-org strong {
+  color: var(--steel);
+  font-weight: 600;
+}
+
+.job-scope {
+  font-size: 7.3pt;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-bottom: 5px;
+  padding: 4px 8px;
+  background: var(--gray-lt);
+  border-radius: 2px;
+  border-left: 2px solid var(--border);
+}
+
+.job ul {
+  list-style: none;
+  padding: 0;
+}
+
+.job ul li {
+  font-size: 7.5pt;
+  color: var(--ink-soft);
+  padding-left: 12px;
+  margin-bottom: 2.5px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.job ul li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--blue);
+  font-size: 6pt;
+  top: 1.5px;
+}
+
+.tech-line {
+  font-size: 6.5pt;
+  color: var(--gray);
+  margin-top: 5px;
+  font-style: italic;
+  padding-left: 12px;
+  line-height: 1.5;
+}
+
+.tech-line strong { color: var(--steel); font-style: normal; }
+
+/* project cards */
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+
+.proj-card {
+  padding: 9px 11px;
+  background: var(--gray-lt);
+  border: 1px solid var(--border);
+  border-top: 2.5px solid var(--blue);
+  border-radius: 0 0 3px 3px;
+}
+
+.proj-title {
+  font-size: 7.5pt;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.proj-text {
+  font-size: 6.8pt;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* tech env table */
+.tech-env {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 5px;
+}
+
+.env-group { }
+
+.env-group-name {
+  font-size: 6pt;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 4px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--border);
+}
+
+.env-item {
+  font-size: 6.8pt;
+  color: var(--ink-soft);
+  padding: 1.5px 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.env-item::before {
+  content: '';
+  display: inline-block;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════
+   PRINT
+═══════════════════════════════════════════ */
+@media print {
+  body { background: white; }
+  .print-btn { display: none; }
+  .page-wrapper { padding: 0; }
+  .page { box-shadow: none; margin: 0; width: 210mm; }
+}
+
+@page { size: A4; margin: 0; }
+</style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button>
+
+<div class="page-wrapper">
+<!-- ═══════════════════ PAGE 1 ═══════════════════ -->
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <div class="name-label">Curriculum Vitae</div>
+        <div class="name">Diego Cuaran</div>
+        <div class="tagline">
+          <strong>Systems Administrator · Infrastructure Engineer · IT Operations</strong><br>
+          Experienced IT professional delivering enterprise systems administration, infrastructure management, network operations and technical support across government, financial and multi-client environments in Spain and internationally.
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="contact-chip"><span class="dot"></span> Spain</div>
+        <div class="contact-chip"><span class="dot"></span> diego.cuaran@outlook.com</div>
+        <div class="contact-chip"><span class="dot"></span> linkedin.com/in/diegocuaran</div>
+        <div class="contact-chip"><span class="dot"></span> Available immediately</div>
+        <div class="contact-chip"><span class="dot"></span> Onsite · Hybrid · Remote</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROLES STRIP -->
+  <div class="roles-strip">
+    <span class="role-badge">Systems Administrator</span>
+    <span class="role-badge">Infrastructure Engineer</span>
+    <span class="role-badge">Windows &amp; Linux Admin</span>
+    <span class="role-badge">Network Operations Engineer</span>
+    <span class="role-badge">IT Operations Analyst</span>
+    <span class="role-badge">NOC Engineer</span>
+    <span class="role-badge">Technical Support L2/L3</span>
+    <span class="role-badge">SOC Analyst L1/L2</span>
+  </div>
+
+  <!-- BODY -->
+  <div class="body-layout">
+
+    <!-- ══ SIDEBAR ══ -->
+    <aside class="sidebar">
+
+      <!-- CORE TECHNICAL SKILLS -->
+      <div class="sb-section">
+        <div class="sb-label">Core Technical Skills</div>
+
+        <div class="skill-group">
+          <div class="skill-group-name">Systems Administration</div>
+          <div class="skill-tags">
+            <span class="stag sys">Windows Server</span>
+            <span class="stag sys">Linux (RHEL/Debian)</span>
+            <span class="stag sys">Active Directory</span>
+            <span class="stag sys">Microsoft 365</span>
+            <span class="stag sys">Group Policy (GPO)</span>
+            <span class="stag sys">WSUS</span>
+            <span class="stag sys">VMware</span>
+            <span class="stag sys">Hyper-V</span>
+            <span class="stag sys">Docker</span>
+            <span class="stag sys">Entra ID (Azure AD)</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-name">Networking</div>
+          <div class="skill-tags">
+            <span class="stag net">TCP/IP</span>
+            <span class="stag net">DNS &amp; DHCP</span>
+            <span class="stag net">LAN/WAN</span>
+            <span class="stag net">VPN</span>
+            <span class="stag net">Cisco</span>
+            <span class="stag net">Juniper</span>
+            <span class="stag net">Load Balancers</span>
+            <span class="stag net">Wireshark</span>
+            <span class="stag net">Nmap</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-name">Automation &amp; Scripting</div>
+          <div class="skill-tags">
+            <span class="stag auto">PowerShell</span>
+            <span class="stag auto">Bash</span>
+            <span class="stag auto">Python</span>
+            <span class="stag auto">REST APIs</span>
+            <span class="stag auto">AI-assisted Automation</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-name">Monitoring &amp; Security</div>
+          <div class="skill-tags">
+            <span class="stag sec">Microsoft Sentinel</span>
+            <span class="stag sec">IBM QRadar</span>
+            <span class="stag sec">AlienVault OSSIM</span>
+            <span class="stag sec">Nessus / TVM</span>
+            <span class="stag sec">ITSM / ITIL</span>
+            <span class="stag sec">Log Analysis</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CORE COMPETENCIES -->
+      <div class="sb-section">
+        <div class="sb-label">Core Competencies</div>
+        <div class="comp-grid">
+          <span class="comp">Systems Administration</span>
+          <span class="comp">Infrastructure Management</span>
+          <span class="comp">IT Operations</span>
+          <span class="comp">Windows Administration</span>
+          <span class="comp">Linux Administration</span>
+          <span class="comp">Network Administration</span>
+          <span class="comp">Virtualisation</span>
+          <span class="comp">Technical Support L2/L3</span>
+          <span class="comp">Incident Management</span>
+          <span class="comp">Change Management</span>
+          <span class="comp">Service Availability</span>
+          <span class="comp">Infrastructure Monitoring</span>
+          <span class="comp">Automation</span>
+          <span class="comp">Documentation</span>
+          <span class="comp">Security Monitoring</span>
+          <span class="comp">Vulnerability Assessment</span>
+        </div>
+      </div>
+
+      <!-- CERTIFICATIONS -->
+      <div class="sb-section">
+        <div class="sb-label">Certifications</div>
+        <div class="cert-item">
+          <div class="cert-name">Certified SOC Analyst (CSA) 312-39</div>
+          <div class="cert-issuer">EC-Council · Global Knowledge · 2023</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-name">MCSE: Productivity Solutions Expert</div>
+          <div class="cert-issuer">Microsoft</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-name">MCSA: Windows Server 2016</div>
+          <div class="cert-issuer">Microsoft · Exam 740</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-name">LPIC-1 Linux Administrator</div>
+          <div class="cert-issuer">Linux Professional Institute · 2018</div>
+        </div>
+      </div>
+
+      <!-- LANGUAGES -->
+      <div class="sb-section">
+        <div class="sb-label">Languages</div>
+        <div class="lang-item">
+          <div class="lang-row"><span class="lang-name">Spanish</span><span class="lang-level">Native</span></div>
+          <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-row"><span class="lang-name">English</span><span class="lang-level">Professional B2</span></div>
+          <div class="lang-bar"><div class="lang-fill" style="width:78%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-row"><span class="lang-name">French</span><span class="lang-level">Working B1</span></div>
+          <div class="lang-bar"><div class="lang-fill" style="width:50%"></div></div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ══ MAIN ══ -->
+    <main class="main">
+
+      <!-- PROFESSIONAL SUMMARY -->
+      <div class="section">
+        <div class="sec-title">Professional Summary</div>
+        <div class="summary-text">
+          Experienced IT professional specialising in <strong>Systems Administration, Infrastructure Management and IT Operations</strong> across Windows Server, Linux and virtualised enterprise environments. Proven track record delivering operational continuity, technical support and infrastructure reliability within large-scale public sector and multi-client environments in Spain, including critical government infrastructure.
+          <br><br>
+          Expertise spans the full operational stack — from Active Directory, Microsoft 365 and network services administration through to infrastructure monitoring, incident management, automation and security operations. Well-versed in working across mixed OS environments, managing enterprise services at scale, and collaborating effectively with distributed systems, network and security teams.
+          <br><br>
+          Currently open to <strong>Systems Administrator, Infrastructure Engineer, IT Operations, Network Operations and Technical Support</strong> roles in Spain, the United Kingdom, the Netherlands, Germany and Switzerland. Available immediately for onsite, hybrid or remote engagements.
+        </div>
+
+        <div class="highlight-row">
+          <div class="hl-box">
+            <div class="hl-val">5+</div>
+            <div class="hl-label">OS &amp; Platform<br>Environments</div>
+          </div>
+          <div class="hl-box">
+            <div class="hl-val">80+</div>
+            <div class="hl-label">Organisations<br>Supported (NOC/SOC)</div>
+          </div>
+          <div class="hl-box">
+            <div class="hl-val">L2/L3</div>
+            <div class="hl-label">Technical Support<br>Level</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROFESSIONAL EXPERIENCE -->
+      <div class="section">
+        <div class="sec-title">Professional Experience</div>
+
+        <!-- JOB 1 -->
+        <div class="job">
+          <div class="job-header">
+            <div class="job-title">IT Operations &amp; Systems Administration Consultant</div>
+            <span class="job-date">Jan 2024 – Present</span>
+          </div>
+          <div class="job-org"><strong>Self-Employed</strong> · Systems Administrator | Infrastructure Management · Spain</div>
+          <div class="job-scope">Delivering IT Operations, Systems Administration and Infrastructure Management services across Windows Server and Linux environments, with a focus on operational excellence, automation, service availability and infrastructure reliability.</div>
+          <ul>
+            <li>Administered and maintained Windows Server and Linux environments, ensuring high availability, platform reliability and operational continuity for business-critical workloads.</li>
+            <li>Managed enterprise directory services including Active Directory, Microsoft 365, DNS, DHCP and Group Policy; maintained user lifecycle management, access controls and identity governance.</li>
+            <li>Monitored infrastructure health, system performance and service availability using enterprise monitoring toolsets; implemented alerting and event correlation to enable proactive incident detection.</li>
+            <li>Troubleshot complex infrastructure, networking and operating system incidents using structured diagnostic methodologies; restored service continuity within defined SLA windows.</li>
+            <li>Automated operational and administrative processes using PowerShell, Bash and Python, reducing manual effort and improving consistency across routine IT tasks.</li>
+            <li>Designed, deployed and maintained virtualised environments using VMware, Hyper-V and Docker, supporting development and production workloads.</li>
+            <li>Produced technical documentation, operational runbooks and implementation guides to support knowledge transfer and operational standardisation.</li>
+            <li>Integrated security best practices into infrastructure operations, including vulnerability validation, patch compliance and event monitoring using Microsoft Sentinel and IBM QRadar.</li>
+          </ul>
+          <div class="tech-line"><strong>Technologies:</strong> Windows Server · Linux · Active Directory · Microsoft 365 · VMware · Hyper-V · Docker · PowerShell · Bash · Python · TCP/IP · DNS · DHCP · Group Policy · Microsoft Sentinel · IBM QRadar · Nmap · Wireshark</div>
+        </div>
+
+        <!-- JOB 2 -->
+        <div class="job">
+          <div class="job-header">
+            <div class="job-title">Network Administrator | IT Operations &amp; Infrastructure</div>
+            <span class="job-date">Jan 2022 – May 2023</span>
+          </div>
+          <div class="job-org"><strong>Grupo ICA – Ministerio de Hacienda (Spanish Ministry of Finance)</strong> · Madrid, Spain</div>
+          <div class="job-scope">Administered network infrastructure and IT operations within one of Spain's most critical government environments, ensuring service availability and operational continuity across a large-scale, highly regulated public sector environment aligned to ENS and ISO 27001.</div>
+          <ul>
+            <li>Administered enterprise network infrastructure, firewall platforms and perimeter security systems across a complex multi-vendor environment, applying configuration changes, policy updates and firmware upgrades with zero unplanned service interruption.</li>
+            <li>Managed secure remote access services (VPN), web filtering platforms and enterprise email security systems, maintaining availability and access integrity for thousands of users.</li>
+            <li>Monitored network infrastructure, servers and critical services using enterprise diagnostic and monitoring platforms; analysed system events and network traffic to identify anomalies and performance issues.</li>
+            <li>Resolved infrastructure and network incidents following ITSM-based procedures; managed service requests and maintained incident records through Remedy to ensure SLA compliance.</li>
+            <li>Administered and maintained endpoint security platforms, ensuring posture compliance and coordinating remediation activities across the enterprise estate.</li>
+            <li>Maintained audit-ready operational documentation, technical procedures and infrastructure records in support of compliance requirements and periodic security reviews.</li>
+            <li>Supported infrastructure security operations through event monitoring, vulnerability assessment coordination and adherence to ENS (Esquema Nacional de Seguridad) high-category requirements.</li>
+          </ul>
+          <div class="tech-line"><strong>Technologies:</strong> Checkpoint R80.X · Forcepoint Stonesoft · Cisco IronPort · Blue Coat Proxy · Pulse Secure VPN · McAfee ePO · Windows Server · TCP/IP · DNS · VPN · Wireshark · Nmap · Remedy ITSM</div>
+        </div>
+
+        <!-- JOB 3 -->
+        <div class="job">
+          <div class="job-header">
+            <div class="job-title">IT Operations &amp; Security Analyst | Multi-Client SOC</div>
+            <span class="job-date">Jul 2023 – Dec 2023</span>
+          </div>
+          <div class="job-org"><strong>Grupo ICA (Cyber-SOC ICASYS)</strong> · Greater Madrid, Spain</div>
+          <div class="job-scope">Operated within a multi-client Security Operations Centre supporting over 80 organisations — primarily Spanish public sector entities — delivering infrastructure monitoring, incident management and operational continuity services.</div>
+          <ul>
+            <li>Monitored enterprise IT infrastructure, servers, applications and network services using SIEM and operational monitoring platforms, ensuring continuous visibility across all managed client environments.</li>
+            <li>Analysed system, application and network events to identify operational anomalies and security incidents; managed triage, escalation and resolution following defined SLA procedures.</li>
+            <li>Collaborated with Systems, Network and IT Support teams to troubleshoot infrastructure issues and restore service availability within agreed timeframes.</li>
+            <li>Contributed to monitoring optimisation, alert tuning and SIEM rule improvements, reducing noise and improving detection accuracy across the managed platform portfolio.</li>
+            <li>Prepared technical reports, operational records and incident tracking documentation to support client communications and internal governance processes.</li>
+          </ul>
+          <div class="tech-line"><strong>Technologies:</strong> SIEM LogICA · MonICA · Microsoft Sentinel · IBM QRadar · Windows Server · Linux · TCP/IP · Event Monitoring · Log Analysis · Incident Management</div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ═══════════════════ PAGE 2 ═══════════════════ -->
+<div class="page">
+  <div class="body-layout" style="min-height:297mm;">
+
+    <!-- SIDEBAR PAGE 2 -->
+    <aside class="sidebar">
+
+      <div class="sb-section">
+        <div class="sb-label">Frameworks &amp; Standards</div>
+        <div class="skill-tags" style="gap:3px;">
+          <span class="stag sys">ITIL</span>
+          <span class="stag sys">ISO 27001</span>
+          <span class="stag sys">NIST CSF</span>
+          <span class="stag sys">CIS Controls</span>
+          <span class="stag sys">ENS (Spain)</span>
+          <span class="stag sys">GDPR</span>
+          <span class="stag sys">MAGERIT / PILAR</span>
+          <span class="stag sys">MITRE ATT&amp;CK</span>
+          <span class="stag sys">ENISA / SANS</span>
+        </div>
+      </div>
+
+      <div class="sb-section">
+        <div class="sb-label">Firewall &amp; Perimeter</div>
+        <div class="skill-tags" style="gap:3px;">
+          <span class="stag net">Checkpoint R80</span>
+          <span class="stag net">Palo Alto</span>
+          <span class="stag net">Fortinet</span>
+          <span class="stag net">Forcepoint Stonesoft</span>
+          <span class="stag net">Cisco ASA</span>
+          <span class="stag net">Juniper SRX</span>
+          <span class="stag net">Blue Coat Proxy</span>
+          <span class="stag net">Cisco IronPort</span>
+          <span class="stag net">McAfee ePO</span>
+        </div>
+      </div>
+
+      <div class="sb-section">
+        <div class="sb-label">SIEM &amp; Monitoring</div>
+        <div class="skill-tags" style="gap:3px;">
+          <span class="stag sec">IBM QRadar</span>
+          <span class="stag sec">Microsoft Sentinel</span>
+          <span class="stag sec">AlienVault OSSIM</span>
+          <span class="stag sec">LogRhythm</span>
+          <span class="stag sec">FortiSIEM</span>
+          <span class="stag sec">HP NNMi</span>
+          <span class="stag sec">Nagios</span>
+          <span class="stag sec">CA Spectrum</span>
+        </div>
+      </div>
+
+      <div class="sb-section">
+        <div class="sb-label">Education</div>
+        <div class="edu-item">
+          <div class="edu-deg">B.Sc. Information Technology Management</div>
+          <div class="edu-inst">FCECEP – Colombian Centre for Professional Higher Education · Cali, Colombia</div>
+          <div class="edu-year">1994–1997 · Recognised by Spanish Ministry of Education</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-deg">Certified SOC Analyst (CSA)</div>
+          <div class="edu-inst">EC-Council · Global Knowledge</div>
+          <div class="edu-year">2023</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-deg">Ethical Hacker (CEH) – EC-Council</div>
+          <div class="edu-inst">Global Knowledge</div>
+          <div class="edu-year">2023</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-deg">Windows Systems Administrator</div>
+          <div class="edu-inst">CAS Training</div>
+          <div class="edu-year">2019</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-deg">LPIC-1 Linux Junior Systems Admin</div>
+          <div class="edu-inst">CAS Training</div>
+          <div class="edu-year">2018</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-deg">Security in Information Systems with IBM</div>
+          <div class="edu-inst">Arrow ECS Education Spain</div>
+          <div class="edu-year">2017</div>
+        </div>
+      </div>
+
+      <div class="sb-section">
+        <div class="sb-label">Profiles &amp; Credentials</div>
+        <div style="font-size:6.2pt; color:var(--gray); line-height:1.9;">
+          <a href="https://www.linkedin.com/in/diegocuaran" style="color:var(--blue);text-decoration:none;">linkedin.com/in/diegocuaran</a><br>
+          <a href="https://www.credly.com/users/dcr.itsec/badges" style="color:var(--blue);text-decoration:none;">credly.com/users/dcr.itsec/badges</a><br>
+          <a href="https://aspen.eccouncil.org/VerifyBadge?type=training&a=xKCjdDbf5s78XNrAOkF3Vw==" style="color:var(--blue);text-decoration:none;">EC-Council Badge Verify</a><br>
+          <a href="https://cs.lpi.org/caf/Xamman/certification/verify/LPI000388655/8h933xt4uh" style="color:var(--blue);text-decoration:none;">LPI Certificate Verify</a>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN PAGE 2 -->
+    <main class="main" style="padding-top:20px;">
+
+      <!-- EXPERIENCE CONTINUED -->
+      <div class="section">
+        <div class="sec-title">Professional Experience (continued)</div>
+
+        <!-- JOB 4: ACUNTIA/AXIANS -->
+        <div class="job">
+          <div class="job-header">
+            <div class="job-title">Systems &amp; Infrastructure Administrator | Network Operations</div>
+            <span class="job-date">Apr 2013 – Sep 2016</span>
+          </div>
+          <div class="job-org"><strong>ACUNTIA / AXIANS (Grupo Innovati)</strong> · Madrid, Spain</div>
+          <div class="job-scope">Delivered Systems Administration, IT Operations, Infrastructure Support and Network Operations services within multi-client NOC/SOC environments, supporting enterprise customers across a range of sectors.</div>
+          <ul>
+            <li>Administered Windows Server and Linux systems across multiple client environments, ensuring consistent platform reliability, performance and operational continuity.</li>
+            <li>Provided L2/L3 technical support for systems, infrastructure and network services, resolving escalated incidents through structured diagnostic processes and ITIL-based procedures.</li>
+            <li>Monitored servers, applications, network infrastructure and enterprise services; applied proactive event management to identify and resolve issues before user impact.</li>
+            <li>Administered multi-vendor network and firewall platforms including Cisco, Palo Alto, Checkpoint, Fortinet and Juniper; managed device configuration, HA failover and firmware lifecycle.</li>
+            <li>Supported change management, scheduled maintenance activities and controlled service implementations across customer environments with minimal operational disruption.</li>
+            <li>Produced technical documentation, operational procedures and knowledge base articles to standardise support delivery and accelerate incident resolution.</li>
+            <li>Supported security operations through SIEM event monitoring, log analysis and incident handling using IBM QRadar, LogRhythm, AlienVault OSSIM and FortiSIEM.</li>
+          </ul>
+          <div class="tech-line"><strong>Technologies:</strong> Windows Server · Linux · VMware · Active Directory · Cisco · Palo Alto · Checkpoint · Fortinet · Blue Coat · IBM QRadar · LogRhythm · AlienVault OSSIM · FortiSIEM · TCP/IP</div>
+        </div>
+
+        <!-- JOB 5: Indra / ICA — main tenure -->
+        <div class="job">
+          <div class="job-header">
+            <div class="job-title">IT Security Analyst | Systems &amp; Infrastructure Administrator</div>
+            <span class="job-date">Jun 2009 – Dec 2021</span>
+          </div>
+          <div class="job-org"><strong>Indra / Grupo ICA</strong> · Madrid, Spain &nbsp;<span style="font-style:normal;color:var(--blue);font-size:6.5pt;font-weight:600;">[12 years · progressive growth]</span></div>
+          <div class="job-scope">Participated in the administration, monitoring and operational management of enterprise IT infrastructure, corporate systems and technology services within large-scale business environments. Progressed through increasing technical responsibility across systems, infrastructure and security operations.</div>
+          <ul>
+            <li>Administered and maintained Windows Server environments and enterprise services, ensuring operational stability, patch compliance and service availability across production infrastructure.</li>
+            <li>Managed server patching and software deployment cycles through WSUS; coordinated maintenance windows with minimal business disruption and full change management compliance.</li>
+            <li>Monitored servers, applications and infrastructure platforms using enterprise monitoring tools; applied event correlation and performance analysis to identify and proactively resolve operational issues.</li>
+            <li>Troubleshot complex infrastructure, systems and platform incidents; produced structured incident reports and root cause analyses to support continuous service improvement.</li>
+            <li>Administered network services, load balancers (Netscaler ADC), web filtering platforms (Blue Coat Proxy) and enterprise communication services across large corporate environments.</li>
+            <li>Managed Active Directory, Entra ID (Azure AD), GPOs and Microsoft 365 in hybrid environments; maintained identity governance, access controls and directory service integrity.</li>
+            <li>Deployed and administered multi-platform SIEM environments (Microsoft Sentinel, IBM QRadar, AlienVault OSSIM); developed correlation rules, managed log sources and conducted security event analysis.</li>
+            <li>Conducted proactive vulnerability assessments using Nessus and Nmap; coordinated remediation activities and produced executive and technical reporting for stakeholders.</li>
+          </ul>
+          <div class="tech-line"><strong>Technologies:</strong> Windows Server · WSUS · Active Directory · Entra ID · Microsoft 365 · Netscaler ADC · Blue Coat Proxy · TCP/IP · Wireshark · Microsoft Sentinel · IBM QRadar · AlienVault OSSIM · Nessus · Nmap</div>
+        </div>
+
+        <!-- JOB 6: NOC Technician -->
+        <div class="job">
+          <div class="job-header">
+            <div class="job-title">Network Operations Technician | IT Infrastructure Support</div>
+            <span class="job-date">Jul 2007 – Jun 2009</span>
+          </div>
+          <div class="job-org"><strong>Indra / Grupo ICA</strong> · Madrid, Spain</div>
+          <div class="job-scope">Supported the operation, monitoring and maintenance of enterprise LAN/WAN infrastructure, providing network availability, operational continuity and technical support across corporate environments.</div>
+          <ul>
+            <li>Monitored enterprise LAN/WAN infrastructure using dedicated network management platforms (HP NNMi, HP OpenView, CA Spectrum, Nagios), maintaining continuous visibility into network health and performance.</li>
+            <li>Configured and administered routers, switches and network devices from multiple vendors; performed configuration backups, change implementation and firmware management.</li>
+            <li>Troubleshot network connectivity, infrastructure and communication incidents, restoring service continuity within defined response times following ITSM escalation procedures.</li>
+            <li>Provided technical support and managed incident records through Remedy; coordinated with Systems and Infrastructure teams to resolve escalated network and platform issues.</li>
+            <li>Analysed network traffic and system logs using Wireshark and related diagnostic tools to identify performance degradation and connectivity issues.</li>
+          </ul>
+          <div class="tech-line"><strong>Technologies:</strong> Cisco · Juniper · Enterasys · HP NNMi · HP OpenView · CA Spectrum · Nagios · Wireshark · TCP/IP · LAN/WAN · Remedy</div>
+        </div>
+
+      </div>
+
+      <!-- KEY PROJECTS -->
+      <div class="section">
+        <div class="sec-title">Key Projects &amp; Technical Highlights</div>
+        <div class="project-grid">
+          <div class="proj-card">
+            <div class="proj-title">AI-Augmented IT Operations Toolkit</div>
+            <div class="proj-text">Designed and implemented an AI-assisted operations toolkit integrating GPT-4 and Claude APIs to automate alert triage, log summarisation and incident correlation. Deployed via Cloudflare Workers with a React/TypeScript frontend and Python backend.</div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-title">SIEM Optimisation — Multi-Client SOC</div>
+            <div class="proj-text">Contributed to the tuning and optimisation of IBM QRadar and LogRhythm deployments across a managed MSSP portfolio. Reduced false positive volumes through custom correlation rule development and log source rationalisation.</div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-title">PowerShell &amp; Python Automation</div>
+            <div class="proj-text">Developed and maintained a library of operational automation scripts in PowerShell, Bash and Python covering Active Directory user management, WSUS reporting, infrastructure health checks and security event triage.</div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-title">ENS-Aligned Infrastructure Hardening</div>
+            <div class="proj-text">Supported ENS (Esquema Nacional de Seguridad) high-category compliance initiatives at the Spanish Ministry of Finance, administering firewall policy reviews, access controls and vulnerability management processes.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TECHNICAL ENVIRONMENTS -->
+      <div class="section">
+        <div class="sec-title">Technical Environments</div>
+        <div class="tech-env">
+          <div class="env-group">
+            <div class="env-group-name">Systems &amp; OS</div>
+            <div class="env-item">Windows Server 2008–2022</div>
+            <div class="env-item">Linux (RHEL, Debian, Ubuntu)</div>
+            <div class="env-item">VMware vSphere / ESXi</div>
+            <div class="env-item">Microsoft Hyper-V</div>
+            <div class="env-item">Docker / Containers</div>
+            <div class="env-item">Microsoft 365 / Azure AD</div>
+            <div class="env-item">Active Directory / GPO / WSUS</div>
+          </div>
+          <div class="env-group">
+            <div class="env-group-name">Networking &amp; Infra</div>
+            <div class="env-item">Cisco IOS / Juniper JunOS</div>
+            <div class="env-item">Checkpoint / Palo Alto / Fortinet</div>
+            <div class="env-item">Forcepoint / Stonesoft</div>
+            <div class="env-item">Blue Coat Proxy / IronPort</div>
+            <div class="env-item">Netscaler ADC</div>
+            <div class="env-item">VPN / DNS / DHCP</div>
+            <div class="env-item">HP NNMi / Nagios / CA Spectrum</div>
+          </div>
+          <div class="env-group">
+            <div class="env-group-name">Monitoring &amp; Security</div>
+            <div class="env-item">IBM QRadar SIEM</div>
+            <div class="env-item">Microsoft Sentinel</div>
+            <div class="env-item">AlienVault OSSIM</div>
+            <div class="env-item">LogRhythm / FortiSIEM</div>
+            <div class="env-item">Nessus / Nmap / Wireshark</div>
+            <div class="env-item">McAfee ePO</div>
+            <div class="env-item">Remedy / ITSM platforms</div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+</div><!-- /page-wrapper -->
+</body>
+</html>
